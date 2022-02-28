@@ -54,4 +54,4 @@ For my second GA Project, I decided to build a fullstack app that tracks the art
 ![Other Pages Wireframe](./wireframes/wf2.jpeg)
 
 ## TECH STACK AND API:
-> I plan on using Express, Node, Postgresql, EJS, Bootstrap/ Other CSS Frameworks to build the app, and Punk API for the beer database.
+I plan on using Express, Node, Postgresql, EJS, Bootstrap/ Other CSS Frameworks to build the app, and [Punk API](https://punkapi.com) for the beer database.
