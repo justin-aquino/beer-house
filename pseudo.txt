@@ -1,0 +1,24 @@
+PHASE 1
+
+1. Display the beer list
+2. Show individual beer
+3. Search bar, filter by name
+
+Phase 2
+1. create models for user, beer, and reviews.
+    a. sign up
+    b. login, logout
+2. CRUD for user (auth)
+    a. Form page for sign up
+    b. Form page for login/logout
+    c. Change password
+    d. Delete Account
+3. CRUD for reviews
+    a. Form page for writing reviews
+    b. Edit reviews
+    c. Display reviews in show.ejs
+    d. Delete reviews.
+4. Create tracker model containing FKs for user and beer.
+
+
+
