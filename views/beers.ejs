@@ -1,6 +1,22 @@
-<h2 class="resultsH2">Results: </h2>
+<p class="searchLabel">Search for a beer below...</p>
+
+<form method="GET" action="/beers">
+    <label for="inputSearch">Search:</label>
+    <input type="text" id="inputSearch" placeholder="Search" name="searchInput"> 
+    <!-- the name for this input will serve as the key when we try to get access to the req.query -->
+
+    <input type="submit" value="Submit">
+
+</form>
+<div class="well">
  <ul>
      <% beers.forEach(beer => { %>
-       <a href="/beers"> <li> <%= beer.name  %> </li> </a> 
-     <% }) %>
- </ul>
+        <li class="p-lg">
+            <a href="/beers/<%= beer.id %> ">  <%= beer.name  %>  </a> 
+            <!-- <form action="post"> -->
+                <input type="submit" value="Track!" class="btn btn-primary">
+            <!-- </form> -->
+        </li>
+        <% }) %>
+    </ul>
+</div>
