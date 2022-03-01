@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
       })
     }
 
-      res.render("beers.ejs", {beers: beerData})
+      res.render("main/beers.ejs", {beers: beerData})
       } catch (error) {
         console.log(error)
       }
@@ -32,7 +32,7 @@ router.get("/:id", async (req,res) => {
         const response = await axios.get(url)
         const beerData = await response.data
         console.log(beerData)
-        res.render("show.ejs", {beer: beerData})
+        res.render("main/show.ejs", {beer: beerData})
     } catch (error) {
         console.log(error)
     }

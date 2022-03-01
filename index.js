@@ -15,6 +15,7 @@ app.use(ejsLayouts);
 
 // //controllers
 app.use("/beers", require("./controllers/beers.js"))
+app.use("/users", require("./controllers/users.js"))
 
 // Routes
 // app.get("/", (req, res) => {

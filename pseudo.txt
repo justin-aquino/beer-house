@@ -16,9 +16,17 @@ Phase 2
 3. CRUD for reviews
     a. Form page for writing reviews
     b. Edit reviews
-    c. Display reviews in show.ejs
+    c. Display reviews in show.ejs. Move add to tracker button to show.ejs
     d. Delete reviews.
 4. Create tracker model containing FKs for user and beer.
+    a. Be able to add a beer in the tracker
+    b. delete beer in the tracker
+    c. add description in the tracker. (I dont have to make a review if I dont want to? Add make a review btn?)
 
+
+
+// find or orcreate when adding to favorite beer
+
+// user.belongsToMany(beers) and vice versa
 
 
