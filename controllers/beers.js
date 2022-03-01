@@ -11,12 +11,9 @@ router.get('/', async (req, res) => {
         const response = await axios.get(url)
         let beerData = response.data
         console.log(req.query)
-
         let searchInput = req.query.searchInput
-    // console.log(dinoData)
     if(searchInput) {
       beerData = beerData.filter(beer => {
-        //   console.log(dino.name)
           return beer.name.toLowerCase()  === searchInput.toLowerCase()
       })
     }
