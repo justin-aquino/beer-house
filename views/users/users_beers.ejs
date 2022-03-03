@@ -1,6 +1,8 @@
 
 <% if (beers[0]) { %>
-    <h2> <%=  beers[0].name%> </h2>
+    <% beers.forEach(beer => { %>
+     <h2> <a href="/users/tracker/<%= beer.name %>"> <%= beer.name %></a>  </h2>
+    <% }) %>
 <% } else {%>
 
     <h1>No beers tracked!</h1>

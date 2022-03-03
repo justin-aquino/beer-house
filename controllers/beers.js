@@ -33,10 +33,17 @@ router.get("/:id", async (req,res) => {
         const beerData = await response.data
         console.log(beerData)
         res.render("main/show.ejs", {beer: beerData})
+    
     } catch (error) {
         console.log(error)
     }
 })
+
+
+
+//get user review for beer
+
+// router.get("/user")
 
 
 

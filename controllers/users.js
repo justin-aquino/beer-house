@@ -24,6 +24,8 @@ router.get('/new', (req, res)=>{
 //     }
 // })
 
+
+//create user
 router.post('/', async (req, res)=>{
     const [newUser, created] = await db.user.findOrCreate({
         where: {
@@ -54,6 +56,8 @@ router.get('/login', (req, res)=>{
     res.render('users/login.ejs', {error: null})
 })
 
+
+//login
 router.post('/login', async (req, res)=>{
    const user = await db.user.findOne({where: {email: req.body.email}})
    if(!user) { // didn't find user in the database
@@ -70,6 +74,7 @@ router.post('/login', async (req, res)=>{
 
 //tracker route
 
+//finds the user, and the beers in their users_beers table
 router.get("/tracker", async (req,res) => {
 //   res.render("users/users_beers.ejs")
     // res.send("This is users_beers")
@@ -81,10 +86,6 @@ router.get("/tracker", async (req,res) => {
             include: [db.beer]
         })
 
-        // const users_beers = await db.user.findAll({
-            
-        //   })
-
         const userBeers = await getUser.getBeers()
         // console.log(userBeers)
 
@@ -94,7 +95,7 @@ router.get("/tracker", async (req,res) => {
     }
 })
 
-//add beer to the beers db
+//add beer to the users_beers db
 
 router.post("/tracker", async (req,res) => {
     try {
@@ -113,6 +114,31 @@ router.post("/tracker", async (req,res) => {
         console.log(error)
     }
 })
+
+
+// finds users and their reviews
+router.get("/tracker/:name", async (req,res) => {
+    //   res.render("users/users_beers.ejs")
+        // res.send("This is users_beers")
+    try {
+        const getBeer = await db.beer.findOne({
+            where: {
+               name: req.params.name
+            }
+        })
+    
+        // const userBeers = await getUser.getBeers()
+            // console.log(userBeers)
+    
+        res.render("users/show.ejs", {beer: getBeer})
+    } catch (error) {
+        console.log(error)
+    }
+})
+    
+
+
+
 
 
 //logout route

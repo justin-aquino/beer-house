@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      user.belongsToMany(models.beer, {through: "users_beers"})
+      models.user.belongsToMany(models.beer, {through: "users_beers"})
+      models.user.hasMany(models.review, {onDelete: "cascade"})
+      
     }
   }
   user.init({

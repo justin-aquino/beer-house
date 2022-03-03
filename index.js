@@ -33,6 +33,7 @@ app.use( async (req,res,next) => {
 // //controllers
 app.use("/beers", require("./controllers/beers.js"))
 app.use("/users", require("./controllers/users.js"))
+// app.use("/users/reviews", require("./controllers/reviews.js"))
 
 // Routes
 // app.get("/", (req, res) => {

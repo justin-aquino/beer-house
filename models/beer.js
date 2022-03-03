@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       // models.beer.belongsTo(models.user)
       models.beer.belongsToMany(models.user, { through: "users_beers" })
+      models.beer.hasMany(models.review, {onDelete: "cascade"})
     }
   }
   beer.init({
