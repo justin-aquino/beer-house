@@ -8,15 +8,14 @@ For my second GA Project, I decided to build a fullstack app that tracks the art
 | Method | Path | Purpose |
 | ------ | -------------- | -------------------------------- |
 | GET | / | Landing Page | Shows a carousel of beer photos, and about page.
-| POST | /SignUp | Sign up page and redirect to login page. |
-| POST | /Login | login page and redirect to tracker page. |
+| POST | /new | Sign up page and redirect to login page. |
+| POST | /login | login page and redirect to tracker page. |
 | GET | /user | displays the user's dashboard , username, email, password.  |
 | GET | /user/tracker | shows the user's tracker list |
-| GET | /user/tracker/:id | shows the user's tracked beer details |
 | GET | /beer | display beer list, including search bar and function |
 | GET | /beer/:id | shows untracked beer's details |
 | POST | /user/tracker/new | form to add a new beer in the beer tracker list.|
-| PUT | /user/tracker/:id/update | Updates the chosen beer. |
+| PUT | /user/tracker/update/:id | Updates the chosen beer. |
 
 ## As a user, I want to be able to:
 1. Search different beers and read their description.
