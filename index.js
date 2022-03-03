@@ -36,26 +36,7 @@ app.use( async (req,res,next) => {
 // //controllers
 app.use("/users", require("./controllers/users.js"))
 app.use("/", require("./controllers/beers.js"))
-// app.use("/users/reviews", require("./controllers/reviews.js"))
 
-// Routes
-// app.get("/", (req, res) => {
-//   res.render("index.ejs")
-// })
-
-
-// //async route lets you use async/await syntax in express route
-// app.get('/beers', async (req, res) => {
-//   const url = `https://api.punkapi.com/v2/beers?page=2&per_page=80`
-//     try {
-//       const response = await axios.get(url)
-//       const beerData = response.data
-//     res.render("beers.ejs", {beers: beerData})
-//     } catch (error) {
-//       console.log(error)
-//     }
-    
-// })
 
 
 app.listen(PORT, err => {

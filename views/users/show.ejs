@@ -1,3 +1,14 @@
 <h2>Name: <%=beer.name%></h2>
 <h3>Yeast: <%= beer.yeast_type %></h3> 
 <p><%= beer.description%></p>
+
+<a href="/users/tracker/<%= beer.name %>/review">
+    <input type="submit" value="Add a Review">
+</a>
+
+
+
+<% beer.reviews.forEach(review => { %>
+    <p><%= review.dataValues.review  %> </p>
+ 
+<% }) %>
