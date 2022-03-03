@@ -11,18 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.beer.belongsTo(models.user)
+      // models.beer.belongsTo(models.user)
       models.beer.belongsToMany(models.user, { through: "users_beers" })
     }
   }
   beer.init({
     name: DataTypes.STRING,
-    type: DataTypes.STRING,
-    manufacturer: DataTypes.STRING,
-    description: DataTypes.TEXT
+    yeast_type: DataTypes.STRING,
+    description: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'beer',
   });
   return beer;
 };
+
+
+// ASK SOMEONE HOW TO REMOVE A COLUMN FROM A TABLE.
+// YOU DONT NEED THE TYPE COLUMN ON BEERS, CHANGE IT TO IMG SRC
+//Also the manufacturer, exchange it with yeast.

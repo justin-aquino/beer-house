@@ -3,16 +3,35 @@ const router = express.Router()
 const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptojs = require('crypto-js')
+const { user } = require('pg/lib/defaults')
+const { append } = require('express/lib/response')
 require('dotenv').config()
 
 router.get('/new', (req, res)=>{
     res.render('users/new.ejs')
 })
 
+
+// router.get("/tracker", async (req,res) => {
+//     await user.findOne({
+//         where: {
+//             email: req.body.email
+//         }
+//     })
+
+//     if (user) {
+//         const getBeers = user.getBeer()
+//     }
+// })
+
 router.post('/', async (req, res)=>{
     const [newUser, created] = await db.user.findOrCreate({
-        where: {email: req.body.email}
+        where: {
+          email: req.body.email
+        }
     })
+
+    // const getBeers = await user.getBeer()
     if(!created){
         console.log('User already exists')
         // render the login page and send an appropriate message
@@ -28,6 +47,8 @@ router.post('/', async (req, res)=>{
         res.redirect('/users/login')
     }
 })
+
+
 
 router.get('/login', (req, res)=>{
     res.render('users/login.ejs', {error: null})
@@ -49,10 +70,52 @@ router.post('/login', async (req, res)=>{
 
 //tracker route
 
-router.get("/tracker", (req,res) => {
-  res.render("users/tracker.ejs")
+router.get("/tracker", async (req,res) => {
+//   res.render("users/users_beers.ejs")
+    // res.send("This is users_beers")
+    try {
+        const getUser = await db.user.findOne({
+            where: {
+                id: res.locals.user.id
+            },
+            include: [db.beer]
+        })
+
+        // const users_beers = await db.user.findAll({
+            
+        //   })
+
+        const userBeers = await getUser.getBeers()
+        // console.log(userBeers)
+
+        res.render("users/users_beers.ejs", {beers: getUser.beers})
+    } catch (error) {
+        console.log(error)
+    }
 })
 
+//add beer to the beers db
+
+router.post("/tracker", async (req,res) => {
+    try {
+      const [beer, beerCreated] = await db.beer.findOrCreate({
+            where: {
+                name: req.body.name,
+                yeast_type: req.body.yeast_type,
+                description: req.body.description,
+            }
+        })
+        res.locals.user.addBeer(beer)
+        res.redirect("/users/tracker")
+        // console.log()
+        // res.send("This is users_beers")
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+//logout route
 router.get('/logout', (req, res)=>{
     console.log('logging out')
     res.clearCookie('userId')

@@ -30,3 +30,29 @@ Phase 2
 // user.belongsToMany(beers) and vice versa
 
 
+FOO-bar
+user.addBeer(beer)
+
+
+QUESTIONS TO ASK ON WEDNESDAY:
+
+// ASK SOMEONE HOW TO REMOVE A COLUMN FROM A TABLE.
+// YOU DONT NEED THE TYPE COLUMN ON BEERS, CHANGE IT TO IMG SRC
+//Also the manufacturer, exchange it to yeast.
+//help modify the dbTest.js
+
+
+STAND UP:
+3/2
+Users db connected, sign in sign up sign out working. Missing: protected routes.
+join tables done (in theory it should be working, I just need help with the dbTest.js to check if it's actually working)
+
+
+to do:
+Check if users_beers join tables is working.
+create a model for reviews and make join tables for that.
+road blocks:
+I have to redo my beers table since the api does not return beer types or manufacturer.
+
+
+1. findOne user > include:beer > getBeer()?

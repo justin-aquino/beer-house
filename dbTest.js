@@ -1,37 +1,53 @@
 const db = require('./models')
 
-db.users_beer.findOrCreate({
-    beerId: 1
-  })
-  .then(category => {
-    console.log(users_beer.beerId)
-  })
-  .catch(console.log)
+async function manyCrud() {
+  try {
+    // fooInstance.addBar
+    const [user, userCreated] = await db.user.findOrCreate({
+      where: {
+        email: "test@test.com",
+      }
+    })
 
-// async function createCategory() {
-//   try {
-//     const newCategory = await db.category.create({ name: 'python' })
-//     console.log(newCategory)
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+    const [beer, beerCreated] = await db.beer.findOrCreate({
+      where: {
+        name: "Comet"
+      }
+    })
 
-// createCategory()
 
-// // const db = require('./models')
+    await user.addBeer(beer)
+    const getUsers = await beer.getUsers()
+    const getBeers = await pet.getBeers()
+    console.log(getUsers)
+    const firstUser = await db.user.findByPk(1)
+    // console.log(firstUser)
+    await firstUser.createBeer({
+     name: "Comet"
+    })
 
-// db.project.findOne({
-//     where: { id: 1 },
-//     include: [db.category]
-//   })
-//   .then(project => {
-//     // by using eager loading, the project model should have a categories key
-//     console.log(project.categories)
+    const firstUserBeers = await firstUser.getBeers()
+    console.log(firstUsersBeers)
 
-//     // createCategory function should be available to this model - it will create the category then add it to the project
-//     project.createCategory({ name: 'express' })
-//     .then(category => {
-//       console.log(category.id)
-//     })
-//   })
+    // EAGER LOADING
+    const users_beers = await db.user.findAll({
+      include: [db.beer]
+    })
+
+    const foundUser = await db.user.findOne({
+      where: {
+        id: 1
+      },
+      include: {
+        model: db.beer,
+        include: db.users_beer
+      }
+    })
+
+    console.log(foundUser)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+manyCrud()

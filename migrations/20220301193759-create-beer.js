@@ -11,12 +11,9 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      type: {
+      yeast_type: {
         type: Sequelize.STRING
-      },
-      manufacturer: {
-        type: Sequelize.STRING
-      },
+      }, 
       description: {
         type: Sequelize.TEXT
       },
