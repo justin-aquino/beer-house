@@ -1,11 +1,12 @@
 const express = require("express")
 const router = express.Router()
 const axios = require("axios")
+const db = require("../models")
 require("dotenv").config()
 
 
 
-router.get('/', async (req, res) => {
+router.get('/beers', async (req, res) => {
     const url = `https://api.punkapi.com/v2/beers?page=2&per_page=80`
       try {
         const response = await axios.get(url)
@@ -26,7 +27,7 @@ router.get('/', async (req, res) => {
   })
 
 
-router.get("/:id", async (req,res) => {
+router.get("/beers/:id", async (req,res) => {
     const url = (`https://api.punkapi.com/v2/beers/${req.params.id}`)
     try {
         const response = await axios.get(url)
@@ -37,6 +38,15 @@ router.get("/:id", async (req,res) => {
     } catch (error) {
         console.log(error)
     }
+})
+
+router.delete("/users/tracker/:id", async (req,res) => {
+  await db.users_beer.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  res.render("users/users_beers.ejs")
 })
 
 

@@ -74,6 +74,28 @@ router.post('/login', async (req, res)=>{
 
 //tracker route
 
+
+//add beer to the users_beers db
+
+router.post("/tracker", async (req,res) => {
+    try {
+        const [beer, beerCreated] = await db.beer.findOrCreate({
+            where: {
+                name: req.body.name,
+                yeast_type: req.body.yeast_type,
+                description: req.body.description,
+            }
+        })
+        res.locals.user.addBeer(beer)
+        res.redirect("/users/tracker")
+        // console.log()
+        // res.send("This is users_beers")
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
 //finds the user, and the beers in their users_beers table
 router.get("/tracker", async (req,res) => {
 //   res.render("users/users_beers.ejs")
@@ -94,28 +116,6 @@ router.get("/tracker", async (req,res) => {
         console.log(error)
     }
 })
-
-//add beer to the users_beers db
-
-router.post("/tracker", async (req,res) => {
-    try {
-      const [beer, beerCreated] = await db.beer.findOrCreate({
-            where: {
-                name: req.body.name,
-                yeast_type: req.body.yeast_type,
-                description: req.body.description,
-            }
-        })
-        res.locals.user.addBeer(beer)
-        res.redirect("/users/tracker")
-        // console.log()
-        // res.send("This is users_beers")
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-
 // finds users and their reviews
 router.get("/tracker/:name", async (req,res) => {
     //   res.render("users/users_beers.ejs")

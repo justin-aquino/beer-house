@@ -2,6 +2,9 @@
 <% if (beers[0]) { %>
     <% beers.forEach(beer => { %>
      <h2> <a href="/users/tracker/<%= beer.name %>"> <%= beer.name %></a>  </h2>
+     <form method="POST" action="/users/tracker/<%= beer.id %>/?_method=DELETE">
+        <input type="submit" value="Delete">
+    </form>
     <% }) %>
 <% } else {%>
 

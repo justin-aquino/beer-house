@@ -7,6 +7,7 @@ const axios = require("axios")
 const db = require("./models") //this connects the sqlz db to express
 const cookieParser = require("cookie-parser")
 const cryptoJS = require("crypto-js")
+const methodOverride = require("method-override")
 
 
 // // Sets EJS as the view engine
@@ -14,6 +15,8 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(express.urlencoded({extended: false}))
 app.use(ejsLayouts);
+
+app.use(methodOverride('_method'));
 
 
 // CUSTOM LOGIN MIDDLEWARE //ALWAYS ON TOP OF CONTROLLERS MIDDLEWARE
@@ -31,8 +34,8 @@ app.use( async (req,res,next) => {
 })
 
 // //controllers
-app.use("/beers", require("./controllers/beers.js"))
 app.use("/users", require("./controllers/users.js"))
+app.use("/", require("./controllers/beers.js"))
 // app.use("/users/reviews", require("./controllers/reviews.js"))
 
 // Routes
