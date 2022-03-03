@@ -5,6 +5,7 @@
      <form method="POST" action="/users/tracker/<%= beer.id %>/?_method=DELETE">
         <input type="submit" value="Delete">
     </form>
+    <a href="/users/tracker/edit/<%= beer.id %>"><input type="submit" value="Edit"></a>
     <% }) %>
 <% } else {%>
 

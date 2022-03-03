@@ -1,1 +1,16 @@
-<form action="/users/tracker/"></form>
+<form action="/users/tracker/<%=beer.id%>/?_method=PUT" method="POST">
+
+    <div>
+        <label for="beerName"> Name:</label>
+        <input type="text" name="name" id="beerName" value="<%= beer.name%>">
+    </div>
+    <div>
+        <label for="yeast_type">Yeast Type: </label>
+        <input type="text" name="yeast_type" id="yeast_type" value="<%=beer.yeast_type %>">
+    </div>
+    <div>
+        <label for="description">Description: </label>
+        <input type="text" name="description" id="description" value="<%=beer.description %>">
+    </div>
+    <input type="submit" value="Update">
+</form>
