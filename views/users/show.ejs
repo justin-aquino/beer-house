@@ -7,8 +7,11 @@
 </a>
 
 
-
-<% beer.reviews.forEach(review => { %>
-    <p><%= review.dataValues.review  %> </p>
- 
-<% }) %>
+<div>
+    <% beer.reviews.forEach(review => { %>
+        <p><%= review.dataValues.review  %> </p>
+        <form method="POST" action="/users/tracker/<%=review.id%>/?_method=DELETE">
+            <button>X</button>
+        </form>
+    <% }) %>
+</div>

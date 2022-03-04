@@ -11,7 +11,7 @@ router.get('/beers', async (req, res) => {
       try {
         const response = await axios.get(url)
         let beerData = response.data
-        console.log(req.query)
+        // console.log(req.query)
         let searchInput = req.query.searchInput
     if(searchInput) {
       beerData = beerData.filter(beer => {
@@ -32,7 +32,7 @@ router.get("/beers/:id", async (req,res) => {
     try {
         const response = await axios.get(url)
         const beerData = await response.data
-        console.log(beerData)
+        // console.log(beerData)
         res.render("main/show.ejs", {beer: beerData})
     
     } catch (error) {
@@ -59,36 +59,36 @@ router.get("/beers/:id", async (req,res) => {
 
 
 //put request
-// router.get("/users/tracker/edit/:id", async (req,res) => {
-//   const getBeerToEdit = await db.users_beer.findOne({
-//     where: {
-//       beerId: req.params.id,
-//       userId: res.locals.user.id
-//     },
-//     // include: [db.user]
-//   })
-//   const beerInfo = await db.beer.findOne({
-//     where: {
-//       id: getBeerToEdit.beerId
-//     }
-//   })
-//   console.log(getBeerToEdit)
-//   res.render("main/editForm.ejs", {beer: beerInfo})
-//   // res.send(beerInfo)
-// })
+router.get("/users/tracker/edit/:id", async (req,res) => {
+  const getBeerToEdit = await db.users_beer.findOne({
+    where: {
+      beerId: req.params.id,
+      userId: res.locals.user.id
+    },
+    // include: [db.user]
+  })
+  const beerInfo = await db.beer.findOne({
+    where: {
+      id: getBeerToEdit.beerId
+    }
+  })
+  // console.log(getBeerToEdit)
+  res.render("main/editForm.ejs", {beer: beerInfo})
+  // res.send(beerInfo)
+})
 
-// router.put("/users/tracker/:id", async (req,res) => {
-//   await db.beer.update({
-//     name: req.body.name,
-//     yeast: req.body.yeast_type,
-//     description: req.body.description
-//   }, {
-//     where: {
-//       id: req.params.id
-//     }
-//   })
-//   res.redirect("/users/tracker")
-// })
+router.put("/users/tracker/:id", async (req,res) => {
+  await db.beer.update({
+    name: req.body.name,
+    yeast: req.body.yeast_type,
+    description: req.body.description
+  }, {
+    where: {
+      id: req.params.id
+    }
+  })
+  res.redirect("/users/tracker")
+})
 
 
 // get beer review

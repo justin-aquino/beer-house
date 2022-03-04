@@ -8,10 +8,10 @@
     <p><%= beer[0].ingredients.yeast %></p>
      
     <form method="POST" action="/users/tracker">
-        <input type="text" name="name" value="<%= beer[0].name %>">
-        <input type="text" name="yeast_type" value="<%= beer[0].ingredients.yeast %>">
+        <input  type="hidden" name="name" value="<%= beer[0].name %>">
+        <input  type="hidden" name="yeast_type" value="<%= beer[0].ingredients.yeast %>">
         <input type="hidden" name="userId" value="<%= user.id %>">
-        <textarea name="description" cols="100" rows="10"> <%= beer[0].description %> </textarea>
+        <input type="hidden" name="description" value="<%= beer[0].description %>" />
         <button class="btn btn-primary" type="submit">Add to Tracker</button>
       </form>
 </div>

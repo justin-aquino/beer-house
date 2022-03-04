@@ -34,8 +34,8 @@ app.use( async (req,res,next) => {
 })
 
 // //controllers
-app.use("/users", require("./controllers/users.js"))
 app.use("/", require("./controllers/beers.js"))
+app.use("/users", require("./controllers/users.js"))
 
 
 
