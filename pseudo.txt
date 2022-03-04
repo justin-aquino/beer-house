@@ -43,16 +43,15 @@ QUESTIONS TO ASK ON WEDNESDAY:
 
 
 STAND UP:
-3/2
-Users db connected, sign in sign up sign out working. Missing: protected routes.
-join tables done (in theory it should be working, I just need help with the dbTest.js to check if it's actually working)
+3/3
+CRUD for beers is done. I'm able to add a review to a beer, and display the user's own review (not including other user's review)
+
 
 
 to do:
-Check if users_beers join tables is working.
-create a model for reviews and make join tables for that.
-road blocks:
-I have to redo my beers table since the api does not return beer types or manufacturer.
 
+CRUD FOR reviews
+Instead of showing just the user's reviews, show all reviews, including the names of the users who made the review.(loop through reviews)
+Only show delete or edit btn if you're the one who made the review.
 
 1. findOne user > include:beer > getBeer()?
