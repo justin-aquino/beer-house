@@ -12,13 +12,16 @@
     <div>
         <% beer.reviews.forEach(review => { %>
             <% if (review.dataValues.userId === usersLocalId) { %>
-                <p><%= review.dataValues.review  %> <% console.log(review.dataValues, usersLocalId) %>  </p>
-                <form method="POST"action="/users/tracker/<%=review.id%>/?_method=DELETE">
+                <p><%= user.email %></p><p><%= review.dataValues.review  %> <% console.log(usersLocalId) %>  </p>
+                <form method="POST" action="/users/tracker/reviews/<%=review.id%>/?_method=DELETE">
                     <button>X</button>
                 </form>
+                <a href="/users/tracker/reviews/edit/<%= review.id %> ">Edit</a>
                 <% } else { %>
-                    <!-- <p>You have no reviews for this beer!</p> -->
+                    <!-- <p>hehe</p> -->
                     <% } %> 
+
+                    <!-- change of plans: instead of review section, it's gonna be a comment section -->
         <% }) %>
     </div>          
 <% } %>

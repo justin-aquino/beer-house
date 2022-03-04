@@ -1,14 +1,13 @@
 
-<% if (beers) { %>
+<% if (beers[0]) { %>
     <% beers.forEach(beer => { %>
-     <h2> <a href="/users/tracker/<%= beer.name %>"> <%= beer.name %></a>  </h2>
-     <form method="POST" action="/users/tracker/<%= beer.name %>/?_method=DELETE">
-        <input type="submit" value="Delete">
-    </form>
-    <a href="/users/tracker/edit/<%= beer.id %>"><input type="submit" value="Edit"></a>
+        <h2> <a href="/users/tracker/<%= beer.name %>"> <%= beer.name %></a>  </h2>
+        <form method="POST" action="/users/tracker/<%= beer.name %>/?_method=DELETE">
+            <input type="submit" value="Delete">
+        </form>
+        <a href="/users/tracker/edit/<%= beer.id %>"><input type="submit" value="Edit"></a>
     <% }) %>
 <% } else {%>
-
     <h1>No beers tracked!</h1>
 <% } %> 
 
