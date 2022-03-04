@@ -107,20 +107,21 @@ router.get("/tracker", async (req,res) => {
 
 //delete
 
-router.delete("/tracker/:id", async (req,res) => {
-    await db.users_beer.destroy({
+router.delete("/tracker/:name", async (req,res) => {
+    // const getUser = await db.user.findOne({
+    //     where: {
+    //         id: res.locals.user.id
+    //     },
+    //     include: [db.beer]
+    // })
+    await db.beer.destroy({
       where: {
-        id: req.params.id
+        name: req.params.name
       }
     })
-    const getUser = await db.user.findOne({
-        where: {
-            id: res.locals.user.id
-        },
-        include: [db.beer]
-    })
     // const userBeers = await getUser.getBeers()
-      res.render("users/users_beers.ejs", {beers: getUser.beers})
+    //   res.render("users/users_beers.ejs", {beers: getUser.beers})
+    res.redirect(`/users/tracker`)
 })
   
 //show for user_beers
@@ -133,8 +134,14 @@ router.get("/tracker/:name", async (req,res) => {
             },
             include: [db.review]
         })
+        // const getReviews = await db.review.findOne({
+        //     where: {
+        //         userId: res.locals.user.id
+        //     }
+        // })
+        const getUsers = await db.user.find
         // console.log(getBeer.reviews)
-        res.render("users/show.ejs", {beer: getBeer})
+        res.render("users/show.ejs", {beer: getBeer, usersLocalId: res.locals.user.id})
         // res.render("users/show.ejs", {review: getBeer.review, beer: getBeer})
     } catch (error) {
         console.log(error)
@@ -144,6 +151,7 @@ router.get("/tracker/:name", async (req,res) => {
 // finds users and their reviews
 
 //this displays the show beer with the newly added review post
+//DONT TAKE OFF THE /REVIEWS IN THE ROUTE
 router.get("/tracker/:name/review", async (req,res) => { //if something goes wrong, you removed the /review in the route
     //   res.render("users/users_beers.ejs")
         // res.send("This is users_beers")
@@ -164,37 +172,37 @@ router.get("/tracker/:name/review", async (req,res) => { //if something goes wro
     }
   })
 
-//   //PUT REQUEST
-//   router.get("/tracker/edit/:id", async (req,res) => {
-//     const getBeerToEdit = await db.users_beer.findOne({
-//       where: {
-//         beerId: req.params.id,
-//         userId: res.locals.user.id
-//       },
-//       // include: [db.user]
-//     })
-//     const beerInfo = await db.beer.findOne({
-//       where: {
-//         id: getBeerToEdit.beerId
-//       }
-//     })
-//     console.log(getBeerToEdit)
-//     res.render("main/editForm.ejs", {beer: beerInfo})
-//     // res.send(beerInfo)
-//   })
+  //PUT REQUEST for Beers
+  router.get("/tracker/edit/:id", async (req,res) => {
+    const getBeerToEdit = await db.users_beer.findOne({
+      where: {
+        beerId: req.params.id,
+        userId: res.locals.user.id
+      },
+      // include: [db.user]
+    })
+    const beerInfo = await db.beer.findOne({
+      where: {
+        id: getBeerToEdit.beerId
+      }
+    })
+    console.log(getBeerToEdit)
+    res.render("main/editForm.ejs", {beer: beerInfo})
+    // res.send(beerInfo)
+  })
   
-//   router.put("/tracker/:id", async (req,res) => {
-//     await db.beer.update({
-//       name: req.body.name,
-//       yeast: req.body.yeast_type,
-//       description: req.body.description
-//     }, {
-//       where: {
-//         id: req.params.id
-//       }
-//     })
-//     res.redirect("/users/tracker")
-//   })
+  router.put("/tracker/:id", async (req,res) => {
+    await db.beer.update({
+      name: req.body.name,
+      yeast: req.body.yeast_type,
+      description: req.body.description
+    }, {
+      where: {
+        id: req.params.id
+      }
+    })
+    res.redirect("/users/tracker")
+  })
   
   
   //post route for the reviews.
