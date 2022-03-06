@@ -1,15 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <img src="https://cdn-icons-png.flaticon.com/512/931/931949.png" alt="beer-icon" width="50px">
+    <a class="navbar-brand" href="/">Beer House</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<% if (beers[0]) { %>
-    <% beers.forEach(beer => { %>
-        <h2> <a href="/users/tracker/<%= beer.name %>"> <%= beer.name %></a>  </h2>
-        <form method="POST" action="/users/tracker/<%= beer.name %>/?_method=DELETE">
-            <input type="submit" value="Delete">
-        </form>
-        <a href="/users/tracker/edit/<%= beer.id %>"><input type="submit" value="Edit"></a>
-    <% }) %>
-<% } else {%>
-    <h1>No beers tracked!</h1>
-<% } %> 
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/users/tracker">Beers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/tracker">Tracker</a>
+          </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+<div class="container border-solid">
+  <% if (beers[0]) { %>
+      <% beers.forEach(beer => { %>
+          <h2> <a href="/users/tracker/<%= beer.name %>"> <%= beer.name %></a>  </h2>
+          <form method="POST" action="/users/tracker/<%= beer.name %>/?_method=DELETE">
+              <input type="submit" value="Delete">
+          </form>
+          <a href="/users/tracker/edit/<%= beer.id %>"><input type="submit" value="Edit"></a>
+      <% }) %>
+  <% } else {%>
+      <h1>No beers tracked!</h1>
+  <% } %> 
+</div>
 
 <% console.log(beers[0]) %> 
 
