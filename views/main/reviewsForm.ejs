@@ -20,11 +20,14 @@
     </div>
   </div>
 </nav>
-
-<form action="/users/tracker/<%= beer.name %>/review " method="POST">
-    <!-- <label for="userName">  </label> -->
-    <input type="hidden" name="userName" value="<%= user.email %>">
-    <label for="review">Review for:  <%= beer.name %></label>
-    <textarea name="review" id="review" cols="100" rows="10"></textarea>
-    <input type="submit" value="submit review">
-</form>
+<div class="form-group m-auto text-center mt-5">
+  <form action="/users/tracker/<%= beer.name %>/review " method="POST">
+      <!-- <label for="userName">  </label> -->
+      <input type="hidden" name="userName" value="<%= user.email %>">
+      <label class="form-label" for="review">Review for:  <%= beer.name %></label>
+      <div>
+        <textarea name="review" id="review" cols="100" rows="10"></textarea>
+      </div>
+      <input class="btn btn-warning" type="submit" value="submit review">
+  </form>
+</div>

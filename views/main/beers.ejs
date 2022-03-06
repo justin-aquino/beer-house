@@ -24,23 +24,20 @@
   </div>
 </nav>
 
-
-<p class="searchLabel">Search for a beer below...</p>
-
-<form method="GET" action="/beers" class="container-fluid">
+<form class="p-2 m-4" method="GET" action="/beers" class="container-fluid">
     <label for="inputSearch">Search:</label>
-    <input type="text" id="inputSearch" placeholder="Search" name="searchInput"> 
+    <input type="text" id="inputSearch" placeholder="Search for a beer" name="searchInput"> 
     <!-- the name for this input will serve as the key when we try to get access to the req.query -->
 
     <input type="submit" value="Submit">
 
 </form>
-<div class="container-fluid">
- <ul>
-     <% beers.forEach(beer => { %>
-        <li class="text-black">
-            <a href="/beers/<%= beer.id %>">  <%= beer.name  %>  </a> 
-        </li>
-        <% }) %>
-    </ul>
+
+
+
+
+<div class="list-group p-4">
+  <% beers.forEach(beer => { %>
+      <a class="list-group-item list-group-item-action" href="/beers/<%= beer.id %>">  <%= beer.name  %>  </a> 
+  <% }) %>
 </div>
