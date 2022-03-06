@@ -10,30 +10,40 @@
       <ul class="navbar-nav me-auto">
         
           <li class="nav-item">
-            <a class="nav-link" href="/users/tracker">Beers</a>
+            <a class="nav-link" href="/beers">Beers</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/users/tracker">Tracker</a>
           </li>
       </ul>
-      
+      <div class="d-flex">
+        <a href="/users/logout" class="text-decoration-none">logout</a>
+      </div>
     </div>
   </div>
 </nav>
-<div class="container border-solid">
-  <% if (beers[0]) { %>
-      <% beers.forEach(beer => { %>
-          <h2> <a href="/users/tracker/<%= beer.name %>"> <%= beer.name %></a>  </h2>
-          <form method="POST" action="/users/tracker/<%= beer.name %>/?_method=DELETE">
-              <input type="submit" value="Delete">
+
+<% if (beers[0]) { %>
+  <% beers.forEach(beer => { %>
+    
+    <div class="card text-white bg-gray m-auto mt-5" style="max-width: 50rem;">
+      
+      <div class="card-header font-weight-bold bg-warning">
+        <a class="text-decoration-none"href="/users/tracker/<%= beer.name %>"> <h4><%= beer.name %></h4> </a>
+      </div>
+      
+      <div class="card-body">
+        <p class="card-text">Yeast: <%= beer.yeast_type%></p>
+        <p class="card-text"><%= beer.description%></p>
+        <div class="d-inline">
+          <a href="/users/tracker/edit/<%= beer.id %>"><button class="btn btn-warning">Edit</button></a>
+          <form class="d-inline" method="POST" action="/users/tracker/<%= beer.name %>/?_method=DELETE">
+            <input class="btn btn-danger" type="submit" value="Delete">
           </form>
-          <a href="/users/tracker/edit/<%= beer.id %>"><input type="submit" value="Edit"></a>
-      <% }) %>
-  <% } else {%>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+<% } else {%>
       <h1>No beers tracked!</h1>
-  <% } %> 
-</div>
-
-<% console.log(beers[0]) %> 
-
-<!-- //need to put if else here if no beers in db -->
+<% } %> 
