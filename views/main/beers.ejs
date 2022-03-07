@@ -24,14 +24,16 @@
   </div>
 </nav>
 
-<form class="p-2 m-4" method="GET" action="/beers" class="container-fluid">
-    <label for="inputSearch">Search:</label>
-    <input type="text" id="inputSearch" placeholder="Search for a beer" name="searchInput"> 
-    <!-- the name for this input will serve as the key when we try to get access to the req.query -->
-
-    <input type="submit" value="Submit">
-
-</form>
+<div class="container m-4">
+  <form class="d-flex" method="GET" action="/beers" class="container-fluid">
+      <label for="inputSearch" class="form-label"> <h2>Search: </h2></label>
+      <input class="form-control ml-2" type="text" id="inputSearch" placeholder="Search for a beer" name="searchInput" style="max-width: 80rem;"> 
+      <!-- the name for this input will serve as the key when we try to get access to the req.query -->
+  
+      <input class="btn btn-primary " type="submit" value="Submit">
+  
+  </form>
+</div>
 
 
 

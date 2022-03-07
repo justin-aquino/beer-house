@@ -24,19 +24,26 @@
   </div>
 </nav>
 
-<form action="/users/tracker/<%=beer.id%>/?_method=PUT" method="POST">
 
-    <div>
-        <label for="beerName"> Name:</label>
-        <input type="text" name="name" id="beerName" value="<%= beer.name%>">
-    </div>
-    <div>
-        <label for="yeast_type">Yeast Type: </label>
-        <input type="text" name="yeast_type" id="yeast_type" value="<%=beer.yeast_type %>">
-    </div>
-    <div>
-        <label for="description">Description: </label>
-        <input type="text" name="description" id="description" value="<%=beer.description %>">
-    </div>
-    <input type="submit" value="Update">
-</form>
+<div class="form-group m-auto mt-5" style="max-width: 50rem;">
+  <form action="/users/tracker/<%=beer.id%>/?_method=PUT" method="POST" >
+      <div class="p-4">
+          <label for="beerName"> <h4> Name: </h4></label>
+          <input class="form-control type="text" name="name" id="beerName" value="<%= beer.name%>">
+      </div>
+      <div class="p-4">
+          <label for="yeast_type"><h4>Yeast Type: </h4></label>
+          <input class="form-control type="text" name="yeast_type" id="yeast_type" value="<%=beer.yeast_type %>">
+      </div>
+      <div class="p-4">
+          <label for="description"> <h4> Description: </h4></label>
+          <input class="form-control" type="text" name="description" id="description" value="<%=beer.description %>">
+      </div>
+      <div class="text-center m-3">
+        <input class="btn btn-warning text-center" type="submit" value="Update">
+      </div>
+  </form>
+</div>
+
+
+

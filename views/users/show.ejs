@@ -24,30 +24,55 @@
   </nav>
 
 
+<div class="card border-light mb-3 mt-4 " style="max-width: 70rem; margin: 0 auto;">
+  <% if (beer) { %>
+    <div class="card-header">
+      <h2>Name: <%=beer.name%></h2>
+    </div>
+    <div class="card-body p-4">
+      <h4 class="card-title">Yeast: <%= beer.yeast_type %></h4>
+      <p class="card-text"><%= beer.description%></p>
+    </div>
+  
+      
+      <a href="/users/tracker/<%= beer.name %>/review">
+          <input class="btn btn-secondary m-4" type="submit" value="Add a Review">
+      </a>
+    </div>    
+      
 
-<% if (beer) { %>
-    <h2>Name: <%=beer.name%></h2>
-    <h3>Yeast: <%= beer.yeast_type %></h3> 
-    <p><%= beer.description%></p>
-    
-    <a href="/users/tracker/<%= beer.name %>/review">
-        <input type="submit" value="Add a Review">
-    </a>
-    
-    
-    <div>
+  <% if (beer.reviews.length < 1) { %>
+    <div class="card border-light mb-3 p-4" style="max-width: 70rem; margin: 0 auto;">
+      <p>No reviews to show.</p>
+    </div>  
+   
+
+  <% } else {%> 
+      <div class="card border-light mb-3 p-4" style="max-width: 70rem; margin: 0 auto;">
         <% beer.reviews.forEach(review => { %>
             <% if (review.dataValues.userId === usersLocalId) { %>
-                <p><%= user.email %></p><p><%= review.dataValues.review  %> <% console.log(usersLocalId) %>  </p>
+              <h6 class="card-title"><%= user.email %>'s reviews for: <%= beer.name  %> </h6>
+              <div class="card border-light mt-2 mb-2 p-4">
+                <p><%= review.dataValues.review  %></p>
+              </div>
+              <div class="d-flex">
                 <form method="POST" action="/users/tracker/reviews/<%=review.id%>/?_method=DELETE">
-                    <button>X</button>
+                    <button class="btn btn-danger">Delete</button>
                 </form>
-                <a href="/users/tracker/reviews/edit/<%= review.id %> ">Edit</a>
+                <a href="/users/tracker/reviews/edit/<%= review.id %> ">
+                  <button class="btn btn-warning">Edit</button>
+                </a>
+              </div>
                 <% } else { %>
                     <!-- <p>hehe</p> -->
-                    <% } %> 
-
-                    <!-- change of plans: instead of review section, it's gonna be a comment section -->
+                <% } %> 
         <% }) %>
-    </div>          
-<% } %>
+      </div>          
+      <% } %>
+  <% } %> 
+
+
+
+
+
+
