@@ -13,7 +13,6 @@ For my second GA Project, I decided to build a fullstack app that tracks the art
 | GET | /logout | Logout Page | Logs user out.
 | POST | /users/new | Sign up page and redirect to login page. |
 | POST | /users/login | login page and redirect to tracker page. |
-
 | GET | /users/tracker | shows the user's tracker list |
 | GET | /users/tracker/:beerName | shows beer details in the tracker list. |
 | POST |/users/tracker/:beerName/review | Review form page for tracked beer. |
