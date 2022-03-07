@@ -3,8 +3,10 @@ GA- SEI Project 2
 ## Why I chose this project.
 For my second GA Project, I decided to build a fullstack app that tracks the artisan beers the user has tried. The inspiration behind the app goes back to my experience as a chef where after every busy shift, employees share a few pints of beer while cleaning the kitchen to reward ourselves for our hard work. 
 
-# Routes
+# Deployed Link: 
+[Beer-House](https://beer-house.herokuapp.com/)
 
+# Routes
 | Method | Path | Purpose |
 | ------ | -------------- | -------------------------------- |
 | GET | / | Landing Page | Shows a carousel of beer photos.
@@ -18,6 +20,8 @@ For my second GA Project, I decided to build a fullstack app that tracks the art
 | PUT | /users/tracker/edit/:id | Updates the chosen beer. |
 | GET | /beer | display beer list, including search bar and function |
 | GET | /beer/:name | shows untracked beer's details |
+| GET | /beer/random| generates random beer |
+
 
 ## As a user, I want to be able to:
 1. Search different beers and read their description.
