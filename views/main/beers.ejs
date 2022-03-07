@@ -1,19 +1,45 @@
-<p class="searchLabel">Search for a beer below...</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <img src="https://cdn-icons-png.flaticon.com/512/931/931949.png" alt="beer-icon" width="50px">
+    <a class="navbar-brand" href="/">Beer House</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<form method="GET" action="/beers">
-    <label for="inputSearch">Search:</label>
-    <input type="text" id="inputSearch" placeholder="Search" name="searchInput"> 
-    <!-- the name for this input will serve as the key when we try to get access to the req.query -->
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="#">Beers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/tracker">Tracker</a>
+          </li>
+      </ul>
+      <div class="d-flex">
+        <a href="/users/logout" class="text-decoration-none">logout</a>
+      </div>
+      
+    </div>
+  </div>
+</nav>
 
-    <input type="submit" value="Submit">
+<div class="container m-4">
+  <form class="d-flex" method="GET" action="/beers" class="container-fluid">
+      <label for="inputSearch" class="form-label"> <h2>Search: </h2></label>
+      <input class="form-control ml-2" type="text" id="inputSearch" placeholder="Search for a beer" name="searchInput" style="max-width: 80rem;"> 
+      <!-- the name for this input will serve as the key when we try to get access to the req.query -->
+  
+      <input class="btn btn-primary " type="submit" value="Submit">
+  
+  </form>
+</div>
 
-</form>
-<div class="well">
- <ul>
-     <% beers.forEach(beer => { %>
-        <li class="text-black">
-            <a href="/beers/<%= beer.id %>">  <%= beer.name  %>  </a> 
-        </li>
-        <% }) %>
-    </ul>
+
+
+
+<div class="list-group p-4">
+  <% beers.forEach(beer => { %>
+      <a class="list-group-item list-group-item-action" href="/beers/<%= beer.id %>">  <%= beer.name  %>  </a> 
+  <% }) %>
 </div>

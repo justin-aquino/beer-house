@@ -48,9 +48,9 @@ router.get('/login', (req, res)=>{
 router.post('/login', async (req, res)=>{
    const user = await db.user.findOne({where: {email: req.body.email}})
    if(!user) { // didn't find user in the database
-       res.render('users/login.ejs', {error: 'Invalid email/password'})
+       res.render('users/login.ejs', {error: 'Invalid email/password', userId: req.cookies.userId })
    } else if(!bcrypt.compareSync(req.body.password, user.password)) { // found user but password was wrong 
-       res.render('users/login.ejs', {error: 'Invalid email/password'})
+       res.render('users/login.ejs', {error: 'Invalid email/password', userId: req.cookies.userId})
    } else {
        const encryptedUserId = cryptojs.AES.encrypt(user.id.toString(), process.env.SECRET)
        const encryptedUserIdString = encryptedUserId.toString()  
@@ -98,7 +98,7 @@ router.get("/tracker", async (req,res) => {
         const userBeers = await getUser.getBeers()
         // console.log(userBeers)
 
-        res.render("users/users_beers.ejs", {beers: getUser.beers})
+        res.render("users/users_beers.ejs", {beers: getUser.beers, userId: req.cookies.userId})
     } catch (error) {
         console.log(error)
     }
@@ -147,7 +147,7 @@ router.get("/tracker/:name", async (req,res) => {
         // })
         // const getUsers = await db.user.find
         // console.log(getBeer.reviews)
-        res.render("users/show.ejs", {beer: getBeer, usersLocalId: res.locals.user.id, user: findUser})
+        res.render("users/show.ejs", {beer: getBeer, usersLocalId: res.locals.user.id, user: findUser, userId: req.cookies.userId})
         // res.render("users/show.ejs", {beer: getBeer, reviews: getReviews})
         // res.render("users/show.ejs", {review: getBeer.review, beer: getBeer})
     } catch (error) {
@@ -178,7 +178,7 @@ router.get("/tracker/:name/review", async (req,res) => { //if something goes wro
           }
         })
         console.log(foundUser)
-        res.render("main/reviewsForm.ejs", {beer: getBeer, user: foundUser})
+        res.render("main/reviewsForm.ejs", {beer: getBeer, user: foundUser, userId: req.cookies.userId})
     } catch (error) {
         console.log(error)
     }
@@ -199,7 +199,7 @@ router.get("/tracker/:name/review", async (req,res) => { //if something goes wro
       }
     })
     console.log(getBeerToEdit)
-    res.render("main/editForm.ejs", {beer: beerInfo})
+    res.render("main/editForm.ejs", {beer: beerInfo, userId: req.cookies.userId})
     // res.send(beerInfo)
   })
   
@@ -277,7 +277,7 @@ router.get("/tracker/reviews/edit/:id", async (req,res) => {
   //   }
   // })
   console.log(getReviewToEdit)
-  res.render("users/reviewEditForm.ejs", {review: getReviewToEdit})
+  res.render("users/reviewEditForm.ejs", {review: getReviewToEdit, userId: req.cookies.userId})
   // res.send(beerInfo)
 })
 

@@ -1,3 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <img src="https://cdn-icons-png.flaticon.com/512/931/931949.png" alt="beer-icon" width="50px">
+    <a class="navbar-brand" href="/">Beer House</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/users/tracker">Beers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/tracker">Tracker</a>
+          </li>
+          <div class="d-flex">
+            <a href="/users/logout" class="text-decoration-none">logout</a>
+          </div>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+
 <h2>Showing Details for: <%= beer[0].name  %> </h2>
 
 <div>
@@ -10,7 +36,7 @@
     <form method="POST" action="/users/tracker">
         <input  type="hidden" name="name" value="<%= beer[0].name %>">
         <input  type="hidden" name="yeast_type" value="<%= beer[0].ingredients.yeast %>">
-        <input type="hidden" name="userId" value="<%= user.id %>">
+        <input type="hidden" name="userId" value="<%= user.id%>">
         <input type="hidden" name="description" value="<%= beer[0].description %>" />
         <button class="btn btn-primary" type="submit">Add to Tracker</button>
       </form>

@@ -1,9 +1,24 @@
-<form action="/users" method="POST">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <div class="container-fluid">
+      <img src="https://cdn-icons-png.flaticon.com/512/931/931949.png" alt="beer-icon" width="50px" class="m-2">
+      <a class="navbar-brand" href="/">Beer House</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</nav>
 
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password">
+<div class="container text-center m-5 p-5">
+  <form action="/users" method="POST">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" class="p-2">
 
-    <input type="submit" value="Sign Up">
-</form>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" class="p-2">
+      <br>
+      <input class="btn btn-primary mt-3" type="submit" value="Sign Up">
+      <p class="p-4">Already have an account? <a href="/users/login" class=" text-decoration-none">Sign in.</a></p>
+  </form>
+</div>

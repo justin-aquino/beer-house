@@ -1,12 +1,35 @@
-<form action="/users/tracker/reviews/<%=review.id%>/?_method=PUT" method="POST">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <img src="https://cdn-icons-png.flaticon.com/512/931/931949.png" alt="beer-icon" width="50px">
+    <a class="navbar-brand" href="/">Beer House</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- <div>
-        <label for="userName"> Name:</label>
-      
-    </div> -->
-    <div>
-        <label for="review">Review: </label>
-        <input type="text" name="review" id="review" value="<%=review.review %>">
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/users/tracker">Beers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/tracker">Tracker</a>
+          </li>
+      </ul>
+      <div class="d-flex">
+        <a href="/users/logout" class="text-decoration-none">logout</a>
+      </div>
     </div>
-    <input type="submit" value="Update">
-</form>
+  </div>
+</nav>
+
+
+
+<div class="form-group m-auto text-center mt-5">
+  <form action="/users/tracker/reviews/<%=review.id%>/?_method=PUT" method="POST">
+      <label for="review"> <h2>Review: </h2> </label> <br>
+
+      <textarea name="review" id="review" cols="100" rows="10"> <%=review.review %> </textarea> <br>
+      <input type="submit" class="btn btn-primary" value="Update">
+  </form>
+</div>

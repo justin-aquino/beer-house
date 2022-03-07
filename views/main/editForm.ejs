@@ -1,16 +1,49 @@
-<form action="/users/tracker/<%=beer.id%>/?_method=PUT" method="POST">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <img src="https://cdn-icons-png.flaticon.com/512/931/931949.png" alt="beer-icon" width="50px">
+    <a class="navbar-brand" href="/">Beer House</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div>
-        <label for="beerName"> Name:</label>
-        <input type="text" name="name" id="beerName" value="<%= beer.name%>">
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/users/tracker">Beers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/tracker">Tracker</a>
+          </li>
+          
+      </ul>
+      <div class="d-flex">
+        <a href="/users/logout" class="text-decoration-none">logout</a>
+      </div>
     </div>
-    <div>
-        <label for="yeast_type">Yeast Type: </label>
-        <input type="text" name="yeast_type" id="yeast_type" value="<%=beer.yeast_type %>">
-    </div>
-    <div>
-        <label for="description">Description: </label>
-        <input type="text" name="description" id="description" value="<%=beer.description %>">
-    </div>
-    <input type="submit" value="Update">
-</form>
+  </div>
+</nav>
+
+
+<div class="form-group m-auto mt-5" style="max-width: 50rem;">
+  <form action="/users/tracker/<%=beer.id%>/?_method=PUT" method="POST" >
+      <div class="p-4">
+          <label for="beerName"> <h4> Name: </h4></label>
+          <input class="form-control type="text" name="name" id="beerName" value="<%= beer.name%>">
+      </div>
+      <div class="p-4">
+          <label for="yeast_type"><h4>Yeast Type: </h4></label>
+          <input class="form-control type="text" name="yeast_type" id="yeast_type" value="<%=beer.yeast_type %>">
+      </div>
+      <div class="p-4">
+          <label for="description"> <h4> Description: </h4></label>
+          <input class="form-control" type="text" name="description" id="description" value="<%=beer.description %>">
+      </div>
+      <div class="text-center m-3">
+        <input class="btn btn-warning text-center" type="submit" value="Update">
+      </div>
+  </form>
+</div>
+
+
+

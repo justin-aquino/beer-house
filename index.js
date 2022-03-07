@@ -16,6 +16,7 @@ app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({extended: false}))
 app.use(ejsLayouts);
+app.use("/public", express.static('public')); 
 
 
 
@@ -37,6 +38,10 @@ app.use( async (req,res,next) => {
 app.use("/", require("./controllers/beers.js"))
 app.use("/users", require("./controllers/users.js"))
 
+app.get("/", (req,res) => {
+  console.log("hello")
+  res.render("main/index.ejs", {userId: req.cookies.userId})
+})
 
 
 app.listen(PORT, err => {

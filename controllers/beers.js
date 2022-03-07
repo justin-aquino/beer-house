@@ -19,7 +19,7 @@ router.get('/beers', async (req, res) => {
       })
     }
 
-      res.render("main/beers.ejs", {beers: beerData})
+      res.render("main/beers.ejs", {beers: beerData, userId: req.cookies.userId})
       } catch (error) {
         console.log(error)
       }
@@ -33,7 +33,7 @@ router.get("/beers/:id", async (req,res) => {
         const response = await axios.get(url)
         const beerData = await response.data
         // console.log(beerData)
-        res.render("main/show.ejs", {beer: beerData})
+        res.render("main/show.ejs", {beer: beerData, userId: req.cookies.userId})
     
     } catch (error) {
         console.log(error)
