@@ -59,3 +59,24 @@ For my second GA Project, I decided to build a fullstack app that tracks the art
 
 ## TECH STACK AND API:
 I plan on using Express, Node, Postgresql, EJS, Bootstrap/ Other CSS Frameworks to build the app, and [Punk API](https://punkapi.com) for the beer database.
+
+# How to run this locally:
+1. Fork this repo.
+2. Clone your forked repo. (Make sure you are cloning your own fork of this repo, and not this repo.)
+3. npm install (to intall all dependencies)
+4. nodemon index.js
+5. visit localhost:8080 to check your running app.
+
+### How to set up database
+1. npm i -g sequelize-cli
+2. npm i sequelize pg
+3. sequelize init
+4. on config.json, change database name to "beer_house", and dialect to "postgres" delete username and password objects.
+5. on your terminal: createdb beer_house
+6. sequelize model:create --name user --attributes email:string,password:string
+7. sequelize model:create --name users_beer --attributes userId:integer,beerId:integer
+8. sequelize model:create --name review --attributes userId:integer,beerId:integer,review:text
+9. sequelize db:migrate
+
+
+If you made a mistake creating your database, sequelize db:migrate:undo:all, and then do steps 1-9

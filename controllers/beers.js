@@ -18,8 +18,11 @@ router.get('/beers', async (req, res) => {
           return beer.name.toLowerCase()  === searchInput.toLowerCase()
       })
     }
-
-      res.render("main/beers.ejs", {beers: beerData, userId: req.cookies.userId})
+      // if(res.locals.user.id){
+        res.render("main/beers.ejs", {beers: beerData, userId: req.cookies.userId})
+      // } else {
+        // res.render("main/404.ejs", {error: "Please Log in First."})
+      // }
       } catch (error) {
         console.log(error)
       }

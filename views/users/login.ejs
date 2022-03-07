@@ -12,6 +12,7 @@
 
 <div class="container m-auto text-center m-5 p-5">
 
+  
   <form action="/users/login" method="POST">
       <label for="email">Email</label>
       <input type="email" name="email" id="email" class="p-2">
@@ -20,5 +21,10 @@
       <br>
       <input class="btn btn-primary text-light mt-3" type="submit" value="Login">
   </form>
+  <% if (error) { %>
+    <p class="text-danger"> <%= error  %> </p>
+  <% } else { %>
+    <p>Please type in your information</p>
+  <% } %> 
   <p class="p-4 text-de">No account?<a href="/users/new" class=" text-decoration-none"> Sign up. </a></p>
 </div>
