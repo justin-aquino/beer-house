@@ -24,20 +24,27 @@
   </div>
 </nav>
 
-<h2>Showing Details for: <%= beer[0].name  %> </h2>
+<div class="container m-5 text-center">
+  <h2>Showing Details for: <%= beer[0].name  %> </h2>
+</div>
 
-<div>
-    <h3><%= beer[0].name %></h3>
-    <img src="<%= beer[0].image_url %> " alt="<%= beer[0].name %> ">
-    <p><%= beer[0].description %></p>
-    <p><%= beer[0].brewers_tips %></p>
-    <p><%= beer[0].ingredients.yeast %></p>
-     
-    <form method="POST" action="/users/tracker">
+  <div class="card border-light mb-3 m-auto" style="max-width: 60rem;">
+    <div class="card-header text-center"><h2> <%= beer[0].name %> </h2></div>
+    <div class="card-body text-center">
+      <div>
+        <img style="margin: 0 auto;" src="<%= beer[0].image_url %> " alt="<%= beer[0].name %>" width="70rem">
+      </div>
+      <h4 class="card-title"><%= beer[0].ingredients.yeast %></h4>
+      <p class="card-text"> <%= beer[0].description %></p>
+      <p><%= beer[0].brewers_tips %></p>
+      <form method="POST" action="/users/tracker">
         <input  type="hidden" name="name" value="<%= beer[0].name %>">
         <input  type="hidden" name="yeast_type" value="<%= beer[0].ingredients.yeast %>">
         <input type="hidden" name="userId" value="<%= user.id%>">
         <input type="hidden" name="description" value="<%= beer[0].description %>" />
         <button class="btn btn-primary" type="submit">Add to Tracker</button>
       </form>
-</div>
+    </div>
+  </div>
+
+  

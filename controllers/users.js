@@ -14,6 +14,8 @@ router.get('/new', (req, res)=>{
 
 //create user
 router.post('/', async (req, res)=>{
+
+  try {
     const [newUser, created] = await db.user.findOrCreate({
         where: {
           email: req.body.email
@@ -35,28 +37,35 @@ router.post('/', async (req, res)=>{
         res.cookie('userId', encryptedUserIdString)
         res.redirect('/users/login')
     }
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 
 
 router.get('/login', (req, res)=>{
-    res.render('users/login.ejs', {error: null})
+    res.render('users/login.ejs', {error: "w"})
 })
 
 
 //login
 router.post('/login', async (req, res)=>{
-   const user = await db.user.findOne({where: {email: req.body.email}})
-   if(!user) { // didn't find user in the database
-       res.render('users/login.ejs', {error: 'Invalid email/password', userId: req.cookies.userId })
-   } else if(!bcrypt.compareSync(req.body.password, user.password)) { // found user but password was wrong 
-       res.render('users/login.ejs', {error: 'Invalid email/password', userId: req.cookies.userId})
-   } else {
-       const encryptedUserId = cryptojs.AES.encrypt(user.id.toString(), process.env.SECRET)
-       const encryptedUserIdString = encryptedUserId.toString()  
-       res.cookie('userId', encryptedUserIdString)
-       res.redirect('/users/tracker')
-   }
+  try {
+    const user = await db.user.findOne({where: {email: req.body.email}})
+    if(!user) { // didn't find user in the database
+        res.render('users/login.ejs', {error: 'Invalid email/password', userId: req.cookies.userId })
+    } else if(!bcrypt.compareSync(req.body.password, user.password)) { // found user but password was wrong 
+        res.render('users/login.ejs', {error: 'Invalid email/password', userId: req.cookies.userId})
+    } else {
+        const encryptedUserId = cryptojs.AES.encrypt(user.id.toString(), process.env.SECRET)
+        const encryptedUserIdString = encryptedUserId.toString()  
+        res.cookie('userId', encryptedUserIdString)
+        res.redirect('/users/tracker')
+    }
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 //tracker route
@@ -108,19 +117,15 @@ router.get("/tracker", async (req,res) => {
 //delete
 
 router.delete("/tracker/:name", async (req,res) => {
-    // const getUser = await db.user.findOne({
-    //     where: {
-    //         id: res.locals.user.id
-    //     },
-    //     include: [db.beer]
-    // })
+  try {
     await db.beer.destroy({
       where: {
         name: req.params.name
       }
     })
-    // const userBeers = await getUser.getBeers()
-    //   res.render("users/users_beers.ejs", {beers: getUser.beers})
+  } catch (error) {
+    console.log(error)
+  }
     res.redirect(`/users/tracker`)
 })
   
@@ -140,16 +145,7 @@ router.get("/tracker/:name", async (req,res) => {
             },
             include: [db.review]
         })
-        // const getReviews = await db.review.findAll({
-        //     where: {
-        //         userId: findUser.id
-        //     }
-        // })
-        // const getUsers = await db.user.find
-        // console.log(getBeer.reviews)
         res.render("users/show.ejs", {beer: getBeer, usersLocalId: res.locals.user.id, user: findUser, userId: req.cookies.userId})
-        // res.render("users/show.ejs", {beer: getBeer, reviews: getReviews})
-        // res.render("users/show.ejs", {review: getBeer.review, beer: getBeer})
     } catch (error) {
         console.log(error)
     }
@@ -167,7 +163,6 @@ router.get("/tracker/:name/review", async (req,res) => { //if something goes wro
             where: {
                name: req.params.name
             },
-            // include: [db.review]
         })
     
         // const userBeers = await getUser.getBeers()
@@ -186,33 +181,41 @@ router.get("/tracker/:name/review", async (req,res) => { //if something goes wro
 
   //PUT REQUEST for Beers
   router.get("/tracker/edit/:id", async (req,res) => {
-    const getBeerToEdit = await db.users_beer.findOne({
-      where: {
-        beerId: req.params.id,
-        userId: res.locals.user.id
-      },
-      // include: [db.user]
-    })
-    const beerInfo = await db.beer.findOne({
-      where: {
-        id: getBeerToEdit.beerId
-      }
-    })
-    console.log(getBeerToEdit)
-    res.render("main/editForm.ejs", {beer: beerInfo, userId: req.cookies.userId})
+    try {
+      const getBeerToEdit = await db.users_beer.findOne({
+        where: {
+          beerId: req.params.id,
+          userId: res.locals.user.id
+        },
+        // include: [db.user]
+      })
+      const beerInfo = await db.beer.findOne({
+        where: {
+          id: getBeerToEdit.beerId
+        }
+      })
+      console.log(getBeerToEdit)
+      res.render("main/editForm.ejs", {beer: beerInfo, userId: req.cookies.userId})
+    } catch (error) {
+      console.log(error)
+    }
     // res.send(beerInfo)
   })
   
   router.put("/tracker/:id", async (req,res) => {
-    await db.beer.update({
-      name: req.body.name,
-      yeast: req.body.yeast_type,
-      description: req.body.description
-    }, {
-      where: {
-        id: req.params.id
-      }
-    })
+    try {
+      await db.beer.update({
+        name: req.body.name,
+        yeast: req.body.yeast_type,
+        description: req.body.description
+      }, {
+        where: {
+          id: req.params.id
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
     res.redirect("/users/tracker")
   })
   
@@ -221,24 +224,28 @@ router.get("/tracker/:name/review", async (req,res) => { //if something goes wro
   
   //post route for the reviews.
   router.post("/tracker/:name/review", async (req,res) => {
-    const makeReview = await db.review.create({
-        review: req.body.review
-      })
-    
-      const getBeer = await db.beer.findOne({
-        where: {
-            name: req.params.name
-        }
-      })
+    try {
+      const makeReview = await db.review.create({
+          review: req.body.review
+        })
       
-      const getUser = await db.user.findOne({
+        const getBeer = await db.beer.findOne({
           where: {
-              id: res.locals.user.id
+              name: req.params.name
           }
-      })
-
-      await getUser.addReview(makeReview)
-      await getBeer.addReview(makeReview)
+        })
+        
+        const getUser = await db.user.findOne({
+            where: {
+                id: res.locals.user.id
+            }
+        })
+  
+        await getUser.addReview(makeReview)
+        await getBeer.addReview(makeReview)
+    } catch (error) {
+      console.log(error)
+    }
     //   const getReviews = await db.review.findAll()
       
     res.redirect(`/users/tracker/${req.params.name}`)
@@ -248,13 +255,17 @@ router.get("/tracker/:name/review", async (req,res) => { //if something goes wro
 
 
 router.delete("/tracker/reviews/:id", async (req,res) => {
-  const findReview = await db.review.findOne({
-    where: {
-      id: req.params.id
-    }
-  })
-  // console.log(findReview)
-    await findReview.destroy()
+  try {
+    const findReview = await db.review.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    // console.log(findReview)
+      await findReview.destroy()
+  } catch (error) {
+    console.log(error)
+  }
   // const userBeers = await getUser.getBeers()
   //   res.render("users/users_beers.ejs", {beers: getUser.beers})
   res.redirect(`/users/tracker`)
@@ -264,32 +275,41 @@ router.delete("/tracker/reviews/:id", async (req,res) => {
 //edit route
 
 router.get("/tracker/reviews/edit/:id", async (req,res) => {
-  const getReviewToEdit = await db.review.findOne({
-    where: {
-      id: req.params.id,
-      // userId: res.locals.user.id
-    },
-    // include: [db.user]
-  })
-  // const beerInfo = await db.beer.findOne({
-  //   where: {
-  //     id: getBeerToEdit.beerId
-  //   }
-  // })
-  console.log(getReviewToEdit)
-  res.render("users/reviewEditForm.ejs", {review: getReviewToEdit, userId: req.cookies.userId})
+  try {
+    const getReviewToEdit = await db.review.findOne({
+      where: {
+        id: req.params.id,
+        // userId: res.locals.user.id
+      },
+      // include: [db.user]
+    })
+    // const beerInfo = await db.beer.findOne({
+    //   where: {
+    //     id: getBeerToEdit.beerId
+    //   }
+    // })
+    console.log(getReviewToEdit)
+    res.render("users/reviewEditForm.ejs", {review: getReviewToEdit, userId: req.cookies.userId})
+
+  } catch (error) {
+    console.log(error)
+  }
   // res.send(beerInfo)
 })
 
 router.put("/tracker/reviews/:id", async (req,res) => {
-  await db.review.update({
-    userName: req.body.userName,
-    review: req.body.review
-  }, {
-    where: {
-      id: req.params.id
-    }
-  })
+  try {
+    await db.review.update({
+      userName: req.body.userName,
+      review: req.body.review
+    }, {
+      where: {
+        id: req.params.id
+      }
+    })
+  } catch(error) {
+    console.log(error)
+  }
   res.redirect("/users/tracker")
 })
 
