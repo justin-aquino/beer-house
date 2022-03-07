@@ -7,40 +7,41 @@ For my second GA Project, I decided to build a fullstack app that tracks the art
 
 | Method | Path | Purpose |
 | ------ | -------------- | -------------------------------- |
-| GET | / | Landing Page | Shows a carousel of beer photos, and about page.
-| POST | /new | Sign up page and redirect to login page. |
-| POST | /login | login page and redirect to tracker page. |
-| GET | /user | displays the user's dashboard , username, email, password.  |
-| GET | /user/tracker | shows the user's tracker list |
+| GET | / | Landing Page | Shows a carousel of beer photos.
+| GET | /logout | Logout Page | Logs user out.
+| POST | /users/new | Sign up page and redirect to login page. |
+| POST | /users/login | login page and redirect to tracker page. |
+
+| GET | /users/tracker | shows the user's tracker list |
+| GET | /users/tracker/:beerName | shows beer details in the tracker list. |
+| POST |/users/tracker/:beerName/review | Review form page for tracked beer. |
+| PUT | /users/tracker/edit/:id | Updates the chosen beer. |
 | GET | /beer | display beer list, including search bar and function |
-| GET | /beer/:id | shows untracked beer's details |
-| POST | /user/tracker/new | form to add a new beer in the beer tracker list.|
-| PUT | /user/tracker/update/:id | Updates the chosen beer. |
+| GET | /beer/:name | shows untracked beer's details |
 
 ## As a user, I want to be able to:
 1. Search different beers and read their description.
 2. Track the beer I have tried and rate them.
-3. Rate/ make a review of the beer that I tried.
+3. Make a review of the beer that I tried.
 
 ## MVP 
 1. Fetch from punk api.
 2. Display and search data.
 3. Add beer to tracker list.
     In the tracker list:
-        a. Form to add beer that is not in the api.
-        b. Delete a beer from the list.
-        c. Update the added beer.
+        a. Delete a beer from the list.
+        b. Update the added beer.
+        c. Click on a beer and show the details.
 4. In show.ejs, render the following:
         a. name
-        b. manufacturer
-        c. type
-        d. user review
-        e. rating
+        b. user review
+        c. description
+        d. Yeast type
+
 5. Sign up, Log in where user can only access their own beer tracker.
 
 ## STRETCH GOALS
-1. Be able to write and post comments about the reviews the users make.
-2. Make a trending beer page where you can upvote and downvote beers.
+1. Make a trending beer page where you can upvote and downvote beers.
 
 
 
