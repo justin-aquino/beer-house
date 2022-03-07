@@ -26,6 +26,20 @@ router.get('/beers', async (req, res) => {
       
   })
 
+//RANDOM BEER
+
+router.get("/beers/random", async (req,res) => {
+  const url = ("https://api.punkapi.com/v2/beers/random")
+  try {
+    const response = await axios.get(url)
+    const randomBeer = await response.data
+    // res.send(randomBeer)
+    res.render("main/random.ejs", {beer: randomBeer})
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 
 router.get("/beers/:id", async (req,res) => {
     const url = (`https://api.punkapi.com/v2/beers/${req.params.id}`)

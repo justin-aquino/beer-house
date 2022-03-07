@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <img src="https://cdn-icons-png.flaticon.com/512/931/931949.png" alt="beer-icon" width="50px">
+      <a class="navbar-brand" href="/">Beer House</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/users/tracker">Beers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/tracker">Tracker</a>
+            </li>
+          
+        </ul>
+        <div class="d-flex">
+            <a href="/users/logout" class="text-decoration-none">logout</a>
+          </div>
+      </div>
+    </div>
+</nav>
+
+
+<div class="card border-secondary m-auto m-3 mt-5" style="max-width: 70rem;">
+    <div class="card-header"><h2><%= beer[0].name %> </h2></div>
+    <div class="card-body">
+      <p class="card-title"><%= beer[0].ingredients.yeast %> </p>
+      <p class="card-text"> <%= beer[0].description %> </p>
+      <p class="card-text"> <%= beer[0].brewers_tips %> </p>
+    </div>
+    <div class="m-auto">
+        <form class="mb-4" method="POST" action="/users/tracker">
+            <input  type="hidden" name="name" value="<%= beer[0].name %>">
+            <input  type="hidden" name="yeast_type" value="<%= beer[0].ingredients.yeast %>">
+            <input type="hidden" name="userId" value="<%= user.id%>">
+            <input type="hidden" name="description" value="<%= beer[0].description %>" />
+            <button class="btn btn-primary text" type="submit">Add to Tracker</button>
+        </form>
+    </div>
+    
+  </div>
+
+  <div class="container text-center m-4">
+    <h2>Click to Get a Beer!</h2>
+    <button class="btn btn-primary m-4">
+      <a href="/beers/random">
+        <img src="https://cdn-icons-png.flaticon.com/512/6995/6995549.png" alt="Randomizer" width="100rem">
+      </a>
+    </button>
+  </div>
+
+
