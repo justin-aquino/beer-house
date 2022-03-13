@@ -16,8 +16,9 @@ For my second GA Project, I decided to build a fullstack app that tracks the art
 | GET | /users/tracker | shows the user's tracker list |
 | GET | /users/tracker/:beerName | shows beer details in the tracker list. |
 | POST |/users/tracker/:beerName/review | Review form page for tracked beer. |
-| DELETE |/users/tracker/reviews/:id | Deletes tracked beer. |
-| GET |/users/tracker/reviews/edit/:id | Gets tracked beer to edit. |
+| DELETE |/users/tracker/reviews/:id | Deletes chosen review. |
+| GET |/users/tracker/reviews/edit/:id | Gets reviews to edit. |
+| PUT | /users/tracker/reviews/:id | Updates the chosen review. |ß
 | PUT | /users/tracker/:id | Updates the chosen beer. |
 | DELETE | /users/tracker/:name | Deletes the chosen beer. |
 | GET | /beers | display beer list, including search bar and function |
