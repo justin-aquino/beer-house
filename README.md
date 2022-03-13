@@ -16,10 +16,13 @@ For my second GA Project, I decided to build a fullstack app that tracks the art
 | GET | /users/tracker | shows the user's tracker list |
 | GET | /users/tracker/:beerName | shows beer details in the tracker list. |
 | POST |/users/tracker/:beerName/review | Review form page for tracked beer. |
-| PUT | /users/tracker/edit/:id | Updates the chosen beer. |
-| GET | /beer | display beer list, including search bar and function |
-| GET | /beer/:name | shows untracked beer's details |
-| GET | /beer/random| generates random beer |
+| DELETE |/users/tracker/reviews/:id | Deletes tracked beer. |
+| GET |/users/tracker/reviews/edit/:id | Gets tracked beer to edit. |
+| PUT | /users/tracker/:id | Updates the chosen beer. |
+| DELETE | /users/tracker/:name | Deletes the chosen beer. |
+| GET | /beers | display beer list, including search bar and function |
+| GET | /beers/:name | shows untracked beer's details |
+| GET | /beers/random| generates random beer |
 
 
 ## As a user, I want to be able to:
@@ -66,16 +69,12 @@ I plan on using Express, Node, Postgresql, EJS, Bootstrap/ Other CSS Frameworks 
 4. nodemon index.js
 5. visit localhost:8080 to check your running app.
 
-### How to set up database
-1. npm i -g sequelize-cli
-2. npm i sequelize pg
-3. sequelize init
-4. on config.json, change database name to "beer_house", and dialect to "postgres" delete username and password objects.
-5. on your terminal: createdb beer_house
-6. sequelize model:create --name user --attributes email:string,password:string
-7. sequelize model:create --name users_beer --attributes userId:integer,beerId:integer
-8. sequelize model:create --name review --attributes userId:integer,beerId:integer,review:text
-9. sequelize db:migrate
 
+### Sources
 
-If you made a mistake creating your database, sequelize db:migrate:undo:all, and then do steps 1-9
+[Punk API](https://punkapi.com)
+[Bootswatch](https://bootswatch.com)
+[Google Images](https://google.com)
+[Flaticons](https://www.flaticon.com/)
+[Bootstrap](https://www.getbootstrap.com/)
+

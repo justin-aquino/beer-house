@@ -45,7 +45,7 @@ router.post('/', async (req, res)=>{
 
 
 router.get('/login', (req, res)=>{
-    res.render('users/login.ejs', {error: "w"})
+    res.render('users/login.ejs', {error: null})
 })
 
 

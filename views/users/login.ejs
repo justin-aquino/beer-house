@@ -21,10 +21,12 @@
       <br>
       <input class="btn btn-primary text-light mt-3" type="submit" value="Login">
   </form>
-  <% if (error) { %>
-    <p class="text-danger"> <%= error  %> </p>
-  <% } else { %>
-    <p>Please type in your information</p>
-  <% } %> 
+  <div>
+    <% if (error) { %>
+      <p class="text-danger"> <%= error  %> </p>
+    <% } else { %>
+      <p>Please type in your information</p>
+    <% } %> 
+  </div>
   <p class="p-4 text-de">No account?<a href="/users/new" class=" text-decoration-none"> Sign up. </a></p>
 </div>
